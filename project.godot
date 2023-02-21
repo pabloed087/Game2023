@@ -51,6 +51,11 @@ texture={
 "svg/scale": 1.0
 }
 
+[layer_names]
+
+2d_physics/layer_1="1 Player"
+2d_physics/layer_2="2 Enemy"
+
 [physics]
 
 common/enable_pause_aware_picking=true
