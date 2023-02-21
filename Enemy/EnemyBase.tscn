@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Enemy/VertexOutline.gdshader" type="Shader" id=1]
+[ext_resource path="res://Enemy/EnemyBase.gd" type="Script" id=2]
+[ext_resource path="res://ART/Chess Piece Sprites/WhiteKing.png" type="Texture" id=3]
+[ext_resource path="res://ART/Chess Piece Sprites/BlackKing.png" type="Texture" id=4]
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 1 )
+shader_param/inputOutlineColor = Color( 0, 0, 0, 1 )
+shader_param/outlineSize = 3
+shader_param/inputTextureSize = Vector2( 32, 32 )
+shader_param/hasTopOutline = true
+shader_param/hasBottomOutline = false
+shader_param/hasLeftOutline = true
+shader_param/hasRightOutline = true
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 3.0
+height = 16.0
+
+[node name="EnemyBase" type="Node2D" groups=["Enemy"]]
+script = ExtResource( 2 )
+sprite_white = ExtResource( 3 )
+sprite_black = ExtResource( 4 )
+
+[node name="EnemySprite" type="Sprite" parent="."]
+material = SubResource( 3 )
+position = Vector2( 0, -17.5 )
+texture = ExtResource( 3 )
+
+[node name="EnemyHitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitbox"]
+position = Vector2( 0, -12 )
+shape = SubResource( 1 )
+
+[connection signal="body_entered" from="EnemyHitbox" to="." method="_on_EnemyHitbox_body_entered"]
